@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffe2e8">
+<title>Eine kleine Überraschung 💗</title>
+<style>
+  :root { --pink:#f5a8bb; --deep:#bd245f; --pale:#fff0f3; --ink:#563744; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; min-height:100vh; display:grid; place-items:center; padding:24px;
+    font-family: Georgia, "Times New Roman", serif; color:var(--ink);
+    background:radial-gradient(circle at 20% 15%,#fff 0 8%,transparent 30%),
+      repeating-linear-gradient(0deg,#fff0f0 0 32px,#ffe7e8 32px 64px);
+    overflow-x:hidden;
+  }
+  .scene { width:min(680px,100%); text-align:center; }
+  .eyebrow { font:600 13px/1.4 system-ui,sans-serif; letter-spacing:.18em; text-transform:uppercase; color:#b75b78; }
+  h1 { font-size:clamp(27px,6vw,42px); font-weight:normal; margin:10px 0 8px; }
+  .hint { font:15px/1.5 system-ui,sans-serif; color:#906979; margin:0 0 28px; }
+  .stage { position:relative; height:clamp(300px,60vw,410px); display:grid; place-items:center; perspective:1000px; }
+  .envelope {
+    position:relative; width:min(520px,92vw); height:clamp(220px,43vw,310px);
+    cursor:pointer; border:0; padding:0; background:transparent; filter:drop-shadow(0 18px 20px #9c4c6530);
+    -webkit-tap-highlight-color:transparent;
+  }
+  .back { position:absolute; inset:0; background:#ef9eb3; border-radius:8px; }
+  .letter {
+    position:absolute; z-index:2; left:7%; width:86%; bottom:5%; height:88%;
+    padding:24px 22px; background:#fffafc; border:1px solid #f7d6df; border-radius:5px;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    transform:translateY(0); transition:transform .85s cubic-bezier(.2,.8,.2,1), height .85s;
+    box-shadow:0 4px 15px #9c4c6518; overflow:hidden;
+  }
+  .letter h2 { font-size:clamp(22px,4vw,30px); font-weight:normal; color:#b72b60; margin:0 0 12px; }
+  .letter p { font-size:clamp(15px,2.6vw,18px); line-height:1.6; margin:4px 0; white-space:pre-line; }
+  .front-left,.front-right,.front-bottom {
+    position:absolute; z-index:3; inset:0; pointer-events:none;
+  }
+  .front-left { background:#f3a8bb; clip-path:polygon(0 0,52% 50%,0 100%); }
+  .front-right { background:#ee9bb1; clip-path:polygon(100% 0,48% 50%,100% 100%); }
+  .front-bottom { background:#f7b7c7; clip-path:polygon(0 100%,50% 48%,100% 100%); }
+  .flap {
+    position:absolute; z-index:4; inset:0 0 auto; height:58%; background:#ffd5df;
+    clip-path:polygon(0 0,100% 0,50% 100%); transform-origin:top;
+    transition:transform .75s ease; backface-visibility:hidden;
+  }
+  .seal {
+    position:absolute; z-index:5; left:50%; top:53%; transform:translate(-50%,-50%);
+    width:68px; height:68px; border-radius:50%; display:grid; place-items:center;
+    color:white; background:#bd245f; font-size:30px; box-shadow:0 4px 10px #8e194650;
+    transition:opacity .25s, transform .25s;
+  }
+  .envelope.open .flap { transform:rotateX(180deg); z-index:1; }
+  .envelope.open .letter { transform:translateY(-48%); height:110%; z-index:6; }
+  .envelope.open .seal { opacity:0; transform:translate(-50%,-50%) scale(.5); }
+  .envelope:focus-visible { outline:3px solid #bd245f; outline-offset:10px; border-radius:12px; }
+  .signature { color:#bd245f; font-style:italic; margin-top:12px!important; }
+  .controls { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:10px; }
+  .controls button {
+    border:1px solid #edb3c2; border-radius:999px; padding:12px 19px; background:#fff9fb;
+    color:#a52d59; font:600 14px system-ui,sans-serif; cursor:pointer;
+  }
+  .controls button:hover { background:#ffe5ec; }
+  .note { margin-top:18px; font:12px/1.5 system-ui,sans-serif; color:#a27b88; }
+  .heart { position:fixed; bottom:-30px; color:#e66b91; pointer-events:none; animation:floatUp 5s linear forwards; }
+  @keyframes floatUp { to { transform:translateY(-110vh) rotate(25deg); opacity:0; } }
+  @media (prefers-reduced-motion:reduce) {
+    *,*::before,*::after { animation-duration:.01ms!important; transition-duration:.01ms!important; }
+  }
+</style>
+</head>
+<body>
+<main class="scene">
+  <div class="eyebrow">Nur für dich</div>
+  <h1>Eine kleine Überraschung 💗</h1>
+  <p class="hint">Tippe auf den Umschlag, um deinen Brief zu öffnen.</p>
+
+  <div class="stage">
+    <button class="envelope" id="envelope" aria-label="Liebesbrief öffnen" aria-expanded="false">
+      <div class="back"></div>
+      <article class="letter">
+        <h2>Für einen besonderen Menschen</h2>
+        <p id="message">Du machst viele ganz normale Momente besonders.
+Danke, dass es dich gibt. 💗</p>
+        <p class="signature" id="signature">Von Herzen</p>
+      </article>
+      <div class="front-left"></div><div class="front-right"></div>
+      <div class="front-bottom"></div><div class="flap"></div>
+      <div class="seal">♥</div>
+    </button>
+  </div>
+
+  <div class="controls">
+    <button id="toggle">Brief öffnen</button>
+    <button id="hearts">Herzen schicken 💕</button>
+  </div>
+  <p class="note">Dein persönlicher Gruß – einfach, liebevoll und kostenlos als HTML-Datei.</p>
+</main>
+<script>
+  const envelope = document.getElementById('envelope');
+  const toggle = document.getElementById('toggle');
+  function setOpen(open) {
+    envelope.classList.toggle('open', open);
+    envelope.setAttribute('aria-expanded', String(open));
+    toggle.textContent = open ? 'Brief schließen' : 'Brief öffnen';
+  }
+  envelope.addEventListener('click', () => setOpen(!envelope.classList.contains('open')));
+  toggle.addEventListener('click', () => setOpen(!envelope.classList.contains('open')));
+  document.getElementById('hearts').addEventListener('click', () => {
+    for (let i=0; i<12; i++) {
+      const heart = document.createElement('span');
+      heart.className = 'heart'; heart.textContent = ['♥','♡','💕'][i%3];
+      heart.style.left = (5 + Math.random()*90) + 'vw';
+      heart.style.fontSize = (16 + Math.random()*22) + 'px';
+      heart.style.animationDuration = (3.5 + Math.random()*2.5) + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6500);
+    }
+  });
+</script>
+</body>
+</html>
