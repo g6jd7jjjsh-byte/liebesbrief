@@ -1,338 +1,187 @@
-<html lang="de">
 
+<!DOCTYPE html>
+<html lang="en">
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Für dich ❤️</title>
+<title>For my bubi ❤️</title>
 
 <style>
-
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
-
   margin: 0;
-
   min-height: 100vh;
-
   display: flex;
-
   justify-content: center;
-
   align-items: center;
-
-  flex-direction: column;
-
-  padding: 20px;
-
   font-family: Georgia, serif;
-
-  background: linear-gradient(135deg,#ffe0e9,#fff5f7,#f8c4d5);
-
-  color: #8e3154;
-
-  text-align: center;
-
+  background: linear-gradient(135deg, #ffe0ec, #ffc1d6, #fff0f5);
   overflow-x: hidden;
+  padding: 25px 12px;
+}
 
+.container {
+  text-align: center;
+  width: 100%;
+  max-width: 480px;
 }
 
 h1 {
-
-  font-weight: normal;
-
-  font-size: 34px;
-
-}
-
-.subtitle {
-
-  font-family: Arial, sans-serif;
-
-  margin-bottom: 45px;
-
+  color: #b83265;
+  font-size: 27px;
+  margin-bottom: 25px;
 }
 
 .envelope {
-
-  width: min(340px, 85vw);
-
-  height: 220px;
-
   position: relative;
-
-  background: #ee9eb5;
-
+  width: 100%;
+  height: 260px;
+  background: #f48fb1;
   border-radius: 8px;
-
+  box-shadow: 0 12px 30px #b8326540;
   cursor: pointer;
+  transition: transform 0.5s;
+}
 
-  box-shadow: 0 15px 35px #9e426044;
-
+.envelope::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-left: 50% solid transparent;
+  border-right: 50% solid transparent;
+  border-top: 145px solid #ec6f9c;
+  z-index: 3;
+  width: 0;
+  height: 0;
+  border-left-width: 50%;
+  border-right-width: 50%;
 }
 
 .letter {
-
   position: absolute;
-
-  z-index: 1;
-
-  width: 88%;
-
-  height: 88%;
-
-  left: 6%;
-
-  top: 6%;
-
-  padding: 20px 12px;
-
-  background: #fffafa;
-
-  border-radius: 5px;
-
-  transition: transform 1s;
-
-  display: flex;
-
-  flex-direction: column;
-
-  justify-content: center;
-
-  align-items: center;
-
-}
-
-.letter h2 {
-
-  color: #c33c70;
-
-  font-weight: normal;
-
-}
-
-.letter p {
-
-  font-size: 16px;
-
-  line-height: 1.6;
-
-}
-
-.flap {
-
-  position: absolute;
-
-  inset: 0;
-
-  background: #ffd0de;
-
-  clip-path: polygon(0 0,100% 0,50% 55%);
-
-  transform-origin: top;
-
-  transition: transform .8s;
-
-  z-index: 4;
-
-}
-
-.front {
-
-  position: absolute;
-
-  inset: 0;
-
-  background: #f3aabd;
-
-  clip-path: polygon(0 100%,0 0,50% 52%,100% 0,100% 100%);
-
-  z-index: 3;
-
-}
-
-.heart {
-
-  position: absolute;
-
-  z-index: 5;
-
-  top: 48%;
-
-  left: 50%;
-
-  transform: translate(-50%,-50%);
-
-  font-size: 38px;
-
-  transition: opacity .3s;
-
-}
-
-.envelope.open .flap {
-
-  transform: rotateX(180deg);
-
+  background: #fffafc;
+  color: #71354d;
+  width: 92%;
+  height: 92%;
+  left: 4%;
+  top: 4%;
+  border-radius: 6px;
+  padding: 20px 17px;
+  overflow-y: auto;
+  text-align: left;
+  line-height: 1.65;
+  font-size: 15px;
+  transition: transform 0.8s;
+  z-index: 2;
 }
 
 .envelope.open .letter {
-
   transform: translateY(-150px);
-
-  z-index: 6;
-
 }
 
-.envelope.open .heart {
-
-  opacity: 0;
-
+.envelope.open {
+  margin-top: 150px;
 }
 
 button {
-
-  margin-top: 35px;
-
+  margin-top: 30px;
+  padding: 13px 28px;
   border: none;
-
   border-radius: 30px;
-
-  padding: 14px 28px;
-
-  background: #bd396b;
-
+  background: #d94f83;
   color: white;
-
   font-size: 16px;
-
   cursor: pointer;
-
+  box-shadow: 0 5px 15px #b8326540;
 }
 
 button:hover {
-
-  background: #a72b5a;
-
+  background: #bd3569;
 }
 
-.floating {
-
+.heart {
   position: fixed;
-
   bottom: -30px;
-
-  animation: float 5s linear forwards;
-
+  color: #e75480;
+  animation: float 6s linear infinite;
   pointer-events: none;
-
 }
 
 @keyframes float {
-
-  to {
-
-    transform: translateY(-110vh) rotate(30deg);
-
-    opacity: 0;
-
+  from {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
   }
-
+  to {
+    transform: translateY(-110vh) rotate(360deg);
+    opacity: 0;
+  }
 }
 
+.hint {
+  color: #a43b66;
+  margin-top: 15px;
+  font-size: 14px;
+}
 </style>
-
 </head>
 
 <body>
 
-<h1>für mein bubi</h1>
+<div class="container">
+  <h1>For my favorite person 💗</h1>
 
-<p class="subtitle">i luvvvv uuuu ...</p>
+  <div class="envelope" id="envelope">
+    <div class="letter">
+      <strong>my bubi</strong>
 
-<div class="envelope" id="envelope">
+      <p>I just want you to know how incredibly special you are to me. Since you came into my life, you have brought so much happiness, warmth, and love into my heart. You make me smile even on difficult days, and somehow, everything feels better whenever I’m with you or hear from you.</p>
 
-  <div class="letter">
+      <p>I love your personality, your smile, your way of making me laugh, and all the little things that make you uniquely you. With you, I can be completely myself, and that feeling means more to me than I could ever explain. You make me feel loved, understood, and safe, and I’m so grateful to have you in my life.</p>
 
-    <h2>i lovvveee youuuuu </h2>
+      <p>Thank you for every sweet moment, every kind word, and every memory we share. Even the simplest moments with you are special to me because they are with you. You are not only my boyfriend, but also one of my favorite people and someone who has a very special place in my heart.</p>
 
-    <p>
+      <p>I hope you always remember how much you mean to me. You deserve all the love and happiness in the world, and I want to be there for you through the good days and the difficult ones. No matter what happens, I will always cherish you and everything we have together.</p>
 
-      my bubi
-
-I just want you to know how incredibly special you are to me. Since you came into my life, you have brought so much happiness, warmth, and love into my heart. You make me smile even on difficult days, and somehow, everything feels better whenever I’m with you or hear from you.
-
-I love your personality, your smile, your way of making me laugh, and all the little things that make you uniquely you. With you, I can be completely myself, and that feeling means more to me than I could ever explain. You make me feel loved, understood, and safe, and I’m so grateful to have you in my life.
-
-Thank you for every sweet moment, every kind word, and every memory we share. Even the simplest moments with you are special to me because they are with you. You are not only my boyfriend, but also one of my favorite people and someone who has a very special place in my heart.
-
-I hope you always remember how much you mean to me. You deserve all the love and happiness in the world, and I want to be there for you through the good days and the difficult ones. No matter what happens, I will always cherish you and everything we have together.
-
-I love you more than words can ever describe. You are my favorite person, my sweetest thought, and one of the most beautiful parts of my life. 
-    </p>
-
-    <p>I'm so lucky to call you my bub❤️.      </p>
-
+      <p>I love you more than words can ever describe. You are my favorite person, my sweetest thought, and one of the most beautiful parts of my life. I’m so lucky to call you bub. ❤️</p>
+    </div>
   </div>
 
-  <div class="flap"></div>
-
-  <div class="front"></div>
-
-  <div class="heart">❤️</div>
-
+  <button onclick="toggleLetter()">Open my letter 💌</button>
+  <div class="hint">A little letter, just for you ❤️</div>
 </div>
 
-<button id="openBtn">Brief öffnen 💌</button>
-
 <script>
-
-const envelope = document.getElementById("envelope");
-
-const button = document.getElementById("openBtn");
-
 function toggleLetter() {
+  document.getElementById("envelope").classList.toggle("open");
 
-  envelope.classList.toggle("open");
+  const button = document.querySelector("button");
+  const isOpen = document.getElementById("envelope").classList.contains("open");
 
-  button.textContent =
-
-    envelope.classList.contains("open")
-
-    ? "Brief schließen 💗"
-
-    : "Brief öffnen 💌";
-
+  button.textContent = isOpen ? "Close my letter 💗" : "Open my letter 💌";
 }
 
-envelope.addEventListener("click", toggleLetter);
-
-button.addEventListener("click", toggleLetter);
-
-function hearts() {
-
+function createHeart() {
   const heart = document.createElement("div");
-
-  heart.className = "floating";
-
-  heart.textContent = "💕";
-
+  heart.className = "heart";
+  heart.textContent = "♥";
   heart.style.left = Math.random() * 100 + "vw";
-
-  heart.style.fontSize = "25px";
-
+  heart.style.fontSize = (14 + Math.random() * 22) + "px";
+  heart.style.animationDuration = (4 + Math.random() * 4) + "s";
   document.body.appendChild(heart);
 
-  setTimeout(() => heart.remove(), 5000);
-
+  setTimeout(() => heart.remove(), 8000);
 }
 
-setInterval(hearts, 900);
-
+setInterval(createHeart, 650);
 </script>
 
 </body>
-
 </html>
+
+
+
