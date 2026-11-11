@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For my bubi ❤️</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Georgia, serif;
+  background: linear-gradient(135deg, #ffe0ec, #ffc1d6, #fff0f5);
+  overflow-x: hidden;
+  padding: 25px 12px;
+}
+
+.container {
+  text-align: center;
+  width: 100%;
+  max-width: 480px;
+}
+
+h1 {
+  color: #b83265;
+  font-size: 27px;
+  margin-bottom: 25px;
+}
+
+.envelope {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  background: #f48fb1;
+  border-radius: 8px;
+  box-shadow: 0 12px 30px #b8326540;
+  cursor: pointer;
+  transition: transform 0.5s;
+}
+
+.envelope::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-left: 50% solid transparent;
+  border-right: 50% solid transparent;
+  border-top: 145px solid #ec6f9c;
+  z-index: 3;
+  width: 0;
+  height: 0;
+  border-left-width: 50%;
+  border-right-width: 50%;
+}
+
+.letter {
+  position: absolute;
+  background: #fffafc;
+  color: #71354d;
+  width: 92%;
+  height: 92%;
+  left: 4%;
+  top: 4%;
+  border-radius: 6px;
+  padding: 20px 17px;
+  overflow-y: auto;
+  text-align: left;
+  line-height: 1.65;
+  font-size: 15px;
+  transition: transform 0.8s;
+  z-index: 2;
+}
+
+.envelope.open .letter {
+  transform: translateY(-150px);
+}
+
+.envelope.open {
+  margin-top: 150px;
+}
+
+button {
+  margin-top: 30px;
+  padding: 13px 28px;
+  border: none;
+  border-radius: 30px;
+  background: #d94f83;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px #b8326540;
+}
+
+button:hover {
+  background: #bd3569;
+}
+
+.heart {
+  position: fixed;
+  bottom: -30px;
+  color: #e75480;
+  animation: float 6s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes float {
+  from {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.hint {
+  color: #a43b66;
+  margin-top: 15px;
+  font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>For my favorite person 💗</h1>
+
+  <div class="envelope" id="envelope">
+    <div class="letter">
+      <strong>my bubi</strong>
+
+      <p>I just want you to know how incredibly special you are to me. Since you came into my life, you have brought so much happiness, warmth, and love into my heart. You make me smile even on difficult days, and somehow, everything feels better whenever I’m with you or hear from you.</p>
+
+      <p>I love your personality, your smile, your way of making me laugh, and all the little things that make you uniquely you. With you, I can be completely myself, and that feeling means more to me than I could ever explain. You make me feel loved, understood, and safe, and I’m so grateful to have you in my life.</p>
+
+      <p>Thank you for every sweet moment, every kind word, and every memory we share. Even the simplest moments with you are special to me because they are with you. You are not only my boyfriend, but also one of my favorite people and someone who has a very special place in my heart.</p>
+
+      <p>I hope you always remember how much you mean to me. You deserve all the love and happiness in the world, and I want to be there for you through the good days and the difficult ones. No matter what happens, I will always cherish you and everything we have together.</p>
+
+      <p>I love you more than words can ever describe. You are my favorite person, my sweetest thought, and one of the most beautiful parts of my life. I’m so lucky to call you bub. ❤️</p>
+    </div>
+  </div>
+
+  <button onclick="toggleLetter()">Open my letter 💌</button>
+  <div class="hint">A little letter, just for you ❤️</div>
+</div>
+
+<script>
+function toggleLetter() {
+  document.getElementById("envelope").classList.toggle("open");
+
+  const button = document.querySelector("button");
+  const isOpen = document.getElementById("envelope").classList.contains("open");
+
+  button.textContent = isOpen ? "Close my letter 💗" : "Open my letter 💌";
+}
+
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.textContent = "♥";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (14 + Math.random() * 22) + "px";
+  heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 8000);
+}
+
+setInterval(createHeart, 650);
+</script>
+
+</body>
+</html>
