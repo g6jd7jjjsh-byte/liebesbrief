@@ -1,2 +1,335 @@
-# liebesbrief
-Liebesbrief
+<html lang="de">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Für dich ❤️</title>
+
+<style>
+
+* { box-sizing: border-box; }
+
+body {
+
+  margin: 0;
+
+  min-height: 100vh;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  flex-direction: column;
+
+  padding: 20px;
+
+  font-family: Georgia, serif;
+
+  background: linear-gradient(135deg,#ffe0e9,#fff5f7,#f8c4d5);
+
+  color: #8e3154;
+
+  text-align: center;
+
+  overflow-x: hidden;
+
+}
+
+h1 {
+
+  font-weight: normal;
+
+  font-size: 34px;
+
+}
+
+.subtitle {
+
+  font-family: Arial, sans-serif;
+
+  margin-bottom: 45px;
+
+}
+
+.envelope {
+
+  width: min(340px, 85vw);
+
+  height: 220px;
+
+  position: relative;
+
+  background: #ee9eb5;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  box-shadow: 0 15px 35px #9e426044;
+
+}
+
+.letter {
+
+  position: absolute;
+
+  z-index: 1;
+
+  width: 88%;
+
+  height: 88%;
+
+  left: 6%;
+
+  top: 6%;
+
+  padding: 20px 12px;
+
+  background: #fffafa;
+
+  border-radius: 5px;
+
+  transition: transform 1s;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+}
+
+.letter h2 {
+
+  color: #c33c70;
+
+  font-weight: normal;
+
+}
+
+.letter p {
+
+  font-size: 16px;
+
+  line-height: 1.6;
+
+}
+
+.flap {
+
+  position: absolute;
+
+  inset: 0;
+
+  background: #ffd0de;
+
+  clip-path: polygon(0 0,100% 0,50% 55%);
+
+  transform-origin: top;
+
+  transition: transform .8s;
+
+  z-index: 4;
+
+}
+
+.front {
+
+  position: absolute;
+
+  inset: 0;
+
+  background: #f3aabd;
+
+  clip-path: polygon(0 100%,0 0,50% 52%,100% 0,100% 100%);
+
+  z-index: 3;
+
+}
+
+.heart {
+
+  position: absolute;
+
+  z-index: 5;
+
+  top: 48%;
+
+  left: 50%;
+
+  transform: translate(-50%,-50%);
+
+  font-size: 38px;
+
+  transition: opacity .3s;
+
+}
+
+.envelope.open .flap {
+
+  transform: rotateX(180deg);
+
+}
+
+.envelope.open .letter {
+
+  transform: translateY(-150px);
+
+  z-index: 6;
+
+}
+
+.envelope.open .heart {
+
+  opacity: 0;
+
+}
+
+button {
+
+  margin-top: 35px;
+
+  border: none;
+
+  border-radius: 30px;
+
+  padding: 14px 28px;
+
+  background: #bd396b;
+
+  color: white;
+
+  font-size: 16px;
+
+  cursor: pointer;
+
+}
+
+button:hover {
+
+  background: #a72b5a;
+
+}
+
+.floating {
+
+  position: fixed;
+
+  bottom: -30px;
+
+  animation: float 5s linear forwards;
+
+  pointer-events: none;
+
+}
+
+@keyframes float {
+
+  to {
+
+    transform: translateY(-110vh) rotate(30deg);
+
+    opacity: 0;
+
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Für einen besonderen Menschen 💗</h1>
+
+<p class="subtitle">Ich habe eine kleine Überraschung für dich ...</p>
+
+<div class="envelope" id="envelope">
+
+  <div class="letter">
+
+    <h2>Du bist besonders ❤️</h2>
+
+    <p>
+
+      Ich wollte dir einfach sagen,
+
+      wie wichtig du mir bist.
+
+      Danke, dass es dich gibt.
+
+      Du machst meine Welt schöner. 💗
+
+    </p>
+
+    <p>In Liebe ❤️</p>
+
+  </div>
+
+  <div class="flap"></div>
+
+  <div class="front"></div>
+
+  <div class="heart">❤️</div>
+
+</div>
+
+<button id="openBtn">Brief öffnen 💌</button>
+
+<script>
+
+const envelope = document.getElementById("envelope");
+
+const button = document.getElementById("openBtn");
+
+function toggleLetter() {
+
+  envelope.classList.toggle("open");
+
+  button.textContent =
+
+    envelope.classList.contains("open")
+
+    ? "Brief schließen 💗"
+
+    : "Brief öffnen 💌";
+
+}
+
+envelope.addEventListener("click", toggleLetter);
+
+button.addEventListener("click", toggleLetter);
+
+function hearts() {
+
+  const heart = document.createElement("div");
+
+  heart.className = "floating";
+
+  heart.textContent = "💕";
+
+  heart.style.left = Math.random() * 100 + "vw";
+
+  heart.style.fontSize = "25px";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 5000);
+
+}
+
+setInterval(hearts, 900);
+
+</script>
+
+</body>
+
+</html>
